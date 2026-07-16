@@ -16,6 +16,7 @@ const NAV_DESKTOP = [
   { id: "home", href: "/", label: "Home" },
   { id: "services", href: "/services", label: "Services" },
   { id: "blog", href: "/blog", label: "Blog" },
+  { id: "about", href: "/about", label: "About" },
   { id: "contact", href: "/contact-us", label: "Contact us" },
 ];
 
@@ -23,6 +24,7 @@ const NAV_MOBILE = [
   { id: "home", href: "/", label: "Home" },
   { id: "services", href: "/services", label: "Services" },
   { id: "blog", href: "/blog", label: "Blog" },
+  { id: "about", href: "/about", label: "About" },
   { id: "contact", href: "/contact-us", label: "Contact" },
 ];
 

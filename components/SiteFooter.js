@@ -30,6 +30,12 @@ export default function SiteFooter({ blogListingTypography = false }) {
         >
           Terms of Service
         </Link>
+        <Link
+          href="/legal/satisfaction-refund-policy"
+          className="underline-offset-2 transition hover:text-white hover:underline"
+        >
+          Satisfaction &amp; Refund Policy
+        </Link>
       </nav>
       <p
         className={clsx(
