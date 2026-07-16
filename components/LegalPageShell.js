@@ -27,24 +27,6 @@ export const legalList =
 export const legalSubHeading =
   "mt-7 text-[15px] font-bold tracking-tight text-slate-900 sm:text-[16px]";
 
-const LEGAL_NAV = [
-  {
-    href: "/legal/privacy-policy",
-    label: "Privacy Policy",
-    id: "privacy",
-  },
-  {
-    href: "/legal/terms-of-service",
-    label: "Terms of Service",
-    id: "terms",
-  },
-  {
-    href: "/legal/satisfaction-refund-policy",
-    label: "Satisfaction & Refund",
-    id: "refund",
-  },
-];
-
 /**
  * Shared layout for legal documents.
  *
@@ -74,7 +56,6 @@ export default function LegalPageShell({
   children,
   icon,
   badge = "Legal",
-  activeLegal,
   accent = "indigo",
 }) {
   const accents = {
@@ -84,7 +65,6 @@ export default function LegalPageShell({
       badge: "border-indigo-200/80 bg-indigo-50 text-indigo-800",
       iconWrap: "from-indigo-600 to-violet-600 shadow-indigo-500/25",
       bar: "from-indigo-500 via-violet-500 to-teal-500",
-      pillActive: "bg-slate-900 text-white shadow-md shadow-slate-900/20",
       cardHover: "hover:border-indigo-200 hover:shadow-indigo-500/10",
     },
     violet: {
@@ -93,7 +73,6 @@ export default function LegalPageShell({
       badge: "border-violet-200/80 bg-violet-50 text-violet-800",
       iconWrap: "from-violet-600 to-fuchsia-600 shadow-violet-500/25",
       bar: "from-violet-500 via-fuchsia-500 to-indigo-500",
-      pillActive: "bg-slate-900 text-white shadow-md shadow-slate-900/20",
       cardHover: "hover:border-violet-200 hover:shadow-violet-500/10",
     },
     teal: {
@@ -102,7 +81,6 @@ export default function LegalPageShell({
       badge: "border-teal-200/80 bg-teal-50 text-teal-900",
       iconWrap: "from-teal-600 to-cyan-600 shadow-teal-500/25",
       bar: "from-teal-500 via-cyan-500 to-indigo-500",
-      pillActive: "bg-slate-900 text-white shadow-md shadow-slate-900/20",
       cardHover: "hover:border-teal-200 hover:shadow-teal-500/10",
     },
     amber: {
@@ -111,7 +89,6 @@ export default function LegalPageShell({
       badge: "border-amber-200/80 bg-amber-50 text-amber-950",
       iconWrap: "from-amber-500 to-orange-500 shadow-amber-500/25",
       bar: "from-amber-500 via-orange-500 to-rose-500",
-      pillActive: "bg-slate-900 text-white shadow-md shadow-slate-900/20",
       cardHover: "hover:border-amber-200 hover:shadow-amber-500/10",
     },
   };
@@ -150,7 +127,7 @@ export default function LegalPageShell({
             aria-hidden
           />
 
-          <div className="relative mx-auto max-w-3xl px-4 pb-10 pt-8 sm:px-6 sm:pb-12 sm:pt-10 lg:max-w-[52rem]">
+          <div className="relative mx-auto max-w-3xl px-4 pb-5 pt-4 sm:px-6 sm:pb-6 sm:pt-5 lg:max-w-[52rem]">
             <nav
               className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[14px] text-slate-500"
               aria-label="Breadcrumb"
@@ -174,7 +151,7 @@ export default function LegalPageShell({
               </span>
             </nav>
 
-            <header className="relative mt-7 overflow-hidden rounded-[1.35rem] border border-slate-200/90 bg-white/90 p-7 shadow-[0_22px_55px_-28px_rgba(15,23,42,0.2)] ring-1 ring-white/70 backdrop-blur-sm sm:p-9 md:p-10">
+            <header className="relative mt-3 overflow-hidden rounded-[1.35rem] border border-slate-200/90 bg-white/90 p-7 shadow-[0_22px_55px_-28px_rgba(15,23,42,0.2)] ring-1 ring-white/70 backdrop-blur-sm sm:p-9 md:p-10">
               <div
                 className={clsx(
                   "absolute inset-x-0 top-0 h-1 bg-gradient-to-r",
@@ -222,34 +199,10 @@ export default function LegalPageShell({
                 </div>
               </div>
             </header>
-
-            <nav
-              className="mt-6 flex flex-wrap gap-2"
-              aria-label="Legal documents"
-            >
-              {LEGAL_NAV.map((item) => {
-                const active = activeLegal === item.id;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={clsx(
-                      "rounded-full px-3.5 py-2 text-[13px] font-semibold transition sm:text-[14px]",
-                      active
-                        ? a.pillActive
-                        : "border border-slate-200/90 bg-white/80 text-slate-600 hover:border-slate-300 hover:bg-white hover:text-slate-900",
-                    )}
-                    aria-current={active ? "page" : undefined}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </nav>
           </div>
         </div>
 
-        <main className="relative mx-auto max-w-3xl px-4 pb-16 pt-8 sm:px-6 sm:pb-20 sm:pt-10 lg:max-w-[52rem]">
+        <main className="relative mx-auto max-w-3xl px-4 pb-16 pt-4 sm:px-6 sm:pb-20 sm:pt-5 lg:max-w-[52rem]">
           <article
             className={clsx(
               "rounded-[1.35rem] border border-slate-200/90 bg-white px-6 py-8 shadow-[0_18px_50px_-30px_rgba(15,23,42,0.18)] sm:px-10 sm:py-11",
