@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { buildConfirmEmail, buildNotifyEmail } from "../../lib/contactEmails";
 import { isValidEmail, trimToMax } from "../../lib/validators";
 
 const MAX_MESSAGE = 12_000;
@@ -11,21 +12,8 @@ const MAX_WORKFLOW = 2_000;
 const MAX_SHORT = 40;
 
 const DEFAULT_TO = "kavitha@completeaiitservices.ai";
-/** Resend test sender until completeaiitservices.ai is verified in Resend. */
-const DEFAULT_FROM = "Complete AI IT Services <onboarding@resend.dev>";
-
-function escapeHtml(s) {
-  return String(s)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
-function row(label, value) {
-  if (!value) return "";
-  return `<tr><td style="padding:6px 12px 6px 0;color:#64748b;vertical-align:top;white-space:nowrap;">${escapeHtml(label)}</td><td style="padding:6px 0;color:#0f172a;">${escapeHtml(value)}</td></tr>`;
-}
+/** Prefer verified domain sender in production via CONTACT_FROM_EMAIL. */
+const DEFAULT_FROM = "Complete AI IT Services <info@completeaiitservices.ai>";
 
 /**
  * Accepts contact inquiries and emails them to CONTACT_TO_EMAIL (default Kavitha),
@@ -35,7 +23,6 @@ function row(label, value) {
  * Production requires:
  * - RESEND_API_KEY
  * - CONTACT_FROM_EMAIL on a Resend-verified domain (e.g. Complete AI IT Services <info@completeaiitservices.ai>)
- *   Using onboarding@resend.dev only delivers to the Resend account owner — not visitors' Gmail.
  */
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -140,52 +127,26 @@ export default async function handler(req, res) {
     inquiryType === "enterprise_rfp" ? "Larger / custom project" : "General question";
   const subject = `[Website contact] ${inquiryLabel}${name ? ` — ${name}` : ""}${company ? ` (${company})` : ""}`;
 
-  const textLines = [
-    `New contact form submission (${payload.receivedAt})`,
-    "",
-    `Inquiry type: ${inquiryLabel}`,
-    `Name: ${name || "(not provided)"}`,
-    `Email: ${email}`,
-    company && `Company: ${company}`,
-    jobTitle && `Role: ${jobTitle}`,
-    industry && `Industry: ${industry}`,
-    teamSize && `Team size: ${teamSize}`,
-    timeline && `Timeline: ${timeline}`,
-    currentStack && `Tools/systems:\n${currentStack}`,
-    workflowFocus && `Workflow focus:\n${workflowFocus}`,
-    message && `Message / notes:\n${message}`,
-  ].filter(Boolean);
+  const notify = buildNotifyEmail({
+    inquiryLabel,
+    name,
+    email,
+    company,
+    jobTitle,
+    industry,
+    teamSize,
+    timeline,
+    currentStack,
+    workflowFocus,
+    message,
+    receivedAt: payload.receivedAt,
+  });
 
-  const html = `<!DOCTYPE html><html><body style="font-family:system-ui,Segoe UI,sans-serif;max-width:640px;margin:16px;color:#0f172a;">
-<h1 style="font-size:18px;margin:0 0 12px;">New website contact</h1>
-<p style="color:#64748b;margin:0 0 16px;">${escapeHtml(payload.receivedAt)}</p>
-<table style="border-collapse:collapse;font-size:14px;width:100%;">
-${row("Inquiry", inquiryLabel)}
-${row("Name", name || "(not provided)")}
-${row("Email", email)}
-${row("Company", company)}
-${row("Role", jobTitle)}
-${row("Industry", industry)}
-${row("Team size", teamSize)}
-${row("Timeline", timeline)}
-</table>
-${
-  currentStack
-    ? `<h2 style="font-size:14px;margin:20px 0 8px;">Tools &amp; systems</h2><pre style="white-space:pre-wrap;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;font-size:13px;">${escapeHtml(currentStack)}</pre>`
-    : ""
-}
-${
-  workflowFocus
-    ? `<h2 style="font-size:14px;margin:20px 0 8px;">Workflow focus</h2><pre style="white-space:pre-wrap;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;font-size:13px;">${escapeHtml(workflowFocus)}</pre>`
-    : ""
-}
-${
-  message
-    ? `<h2 style="font-size:14px;margin:20px 0 8px;">Message / notes</h2><pre style="white-space:pre-wrap;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;font-size:13px;">${escapeHtml(message)}</pre>`
-    : ""
-}
-<p style="margin-top:24px;font-size:13px;color:#64748b;">Reply to this email to respond to the sender.</p>
-</body></html>`;
+  const confirm = buildConfirmEmail({
+    inquiryLabel,
+    name,
+    company,
+  });
 
   try {
     const resend = new Resend(apiKey);
@@ -194,8 +155,8 @@ ${
       to: [toEmail],
       replyTo: email,
       subject,
-      text: textLines.join("\n"),
-      html,
+      text: notify.text,
+      html: notify.html,
     });
 
     if (error) {
@@ -218,42 +179,13 @@ ${
       });
     }
 
-    const greet = name ? escapeHtml(name.split(/\s+/)[0]) : "there";
-    const confirmSubject = "We received your message — Complete AI IT Services";
-    const confirmText = [
-      `Hi ${name ? name.split(/\s+/)[0] : "there"},`,
-      "",
-      "Thanks for contacting Complete AI IT Services. We received your message and will follow up shortly.",
-      "",
-      `Inquiry type: ${inquiryLabel}`,
-      company ? `Company: ${company}` : null,
-      "",
-      "If you need to add anything, reply to this email or write to info@completeaiitservices.ai.",
-      "",
-      "— Complete AI IT Services",
-      "Pleasanton, CA · https://www.completeaiitservices.ai",
-    ]
-      .filter((line) => line !== null)
-      .join("\n");
-
-    const confirmHtml = `<!DOCTYPE html><html><body style="font-family:system-ui,Segoe UI,sans-serif;max-width:640px;margin:16px;color:#0f172a;">
-<p style="font-size:15px;line-height:1.55;margin:0 0 14px;">Hi ${greet},</p>
-<p style="font-size:15px;line-height:1.55;margin:0 0 14px;">Thanks for contacting <strong>Complete AI IT Services</strong>. We received your message and will follow up shortly.</p>
-<table style="border-collapse:collapse;font-size:14px;width:100%;margin:0 0 16px;">
-${row("Inquiry", inquiryLabel)}
-${row("Company", company)}
-</table>
-<p style="font-size:14px;line-height:1.55;color:#475569;margin:0 0 14px;">If you need to add anything, reply to this email or write to <a href="mailto:info@completeaiitservices.ai" style="color:#1d4ed8;">info@completeaiitservices.ai</a>.</p>
-<p style="font-size:14px;line-height:1.55;margin:24px 0 0;color:#0f172a;">— Complete AI IT Services<br/><span style="color:#64748b;">Pleasanton, CA · <a href="https://www.completeaiitservices.ai" style="color:#1d4ed8;">completeaiitservices.ai</a></span></p>
-</body></html>`;
-
     const { data: confirmData, error: confirmError } = await resend.emails.send({
       from: fromEmail,
       to: [email],
       replyTo: toEmail,
-      subject: confirmSubject,
-      text: confirmText,
-      html: confirmHtml,
+      subject: "We received your message — Complete AI IT Services",
+      text: confirm.text,
+      html: confirm.html,
     });
 
     if (confirmError) {
