@@ -28,8 +28,14 @@ function row(label, value) {
 }
 
 /**
- * Accepts contact inquiries and emails them to CONTACT_TO_EMAIL (default Kavitha).
+ * Accepts contact inquiries and emails them to CONTACT_TO_EMAIL (default Kavitha),
+ * then sends a confirmation to the submitter.
  * Optional CONTACT_WEBHOOK_URL still receives a JSON copy.
+ *
+ * Production requires:
+ * - RESEND_API_KEY
+ * - CONTACT_FROM_EMAIL on a Resend-verified domain (e.g. Complete AI IT Services <info@completeaiitservices.ai>)
+ *   Using onboarding@resend.dev only delivers to the Resend account owner — not visitors' Gmail.
  */
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -183,7 +189,7 @@ ${
 
   try {
     const resend = new Resend(apiKey);
-    const { error } = await resend.emails.send({
+    const { data: notifyData, error } = await resend.emails.send({
       from: fromEmail,
       to: [toEmail],
       replyTo: email,
@@ -194,11 +200,73 @@ ${
 
     if (error) {
       // eslint-disable-next-line no-console
-      console.error("[api/contact] Resend error", error);
+      console.error("[api/contact] Resend notify error", {
+        error,
+        fromEmail,
+        toEmail,
+      });
+      const msg = String(error?.message || "").toLowerCase();
+      const domainHint =
+        msg.includes("domain") ||
+        msg.includes("not verified") ||
+        msg.includes("from")
+          ? " Email sending domain is not verified in Resend yet — verify completeaiitservices.ai and set CONTACT_FROM_EMAIL."
+          : "";
       return res.status(502).json({
         ok: false,
-        error: "We could not deliver your message. Please try again or email info@completeaiitservices.ai.",
+        error: `We could not deliver your message.${domainHint} Please try again or email info@completeaiitservices.ai.`,
       });
+    }
+
+    const greet = name ? escapeHtml(name.split(/\s+/)[0]) : "there";
+    const confirmSubject = "We received your message — Complete AI IT Services";
+    const confirmText = [
+      `Hi ${name ? name.split(/\s+/)[0] : "there"},`,
+      "",
+      "Thanks for contacting Complete AI IT Services. We received your message and will follow up shortly.",
+      "",
+      `Inquiry type: ${inquiryLabel}`,
+      company ? `Company: ${company}` : null,
+      "",
+      "If you need to add anything, reply to this email or write to info@completeaiitservices.ai.",
+      "",
+      "— Complete AI IT Services",
+      "Pleasanton, CA · https://www.completeaiitservices.ai",
+    ]
+      .filter((line) => line !== null)
+      .join("\n");
+
+    const confirmHtml = `<!DOCTYPE html><html><body style="font-family:system-ui,Segoe UI,sans-serif;max-width:640px;margin:16px;color:#0f172a;">
+<p style="font-size:15px;line-height:1.55;margin:0 0 14px;">Hi ${greet},</p>
+<p style="font-size:15px;line-height:1.55;margin:0 0 14px;">Thanks for contacting <strong>Complete AI IT Services</strong>. We received your message and will follow up shortly.</p>
+<table style="border-collapse:collapse;font-size:14px;width:100%;margin:0 0 16px;">
+${row("Inquiry", inquiryLabel)}
+${row("Company", company)}
+</table>
+<p style="font-size:14px;line-height:1.55;color:#475569;margin:0 0 14px;">If you need to add anything, reply to this email or write to <a href="mailto:info@completeaiitservices.ai" style="color:#1d4ed8;">info@completeaiitservices.ai</a>.</p>
+<p style="font-size:14px;line-height:1.55;margin:24px 0 0;color:#0f172a;">— Complete AI IT Services<br/><span style="color:#64748b;">Pleasanton, CA · <a href="https://www.completeaiitservices.ai" style="color:#1d4ed8;">completeaiitservices.ai</a></span></p>
+</body></html>`;
+
+    const { data: confirmData, error: confirmError } = await resend.emails.send({
+      from: fromEmail,
+      to: [email],
+      replyTo: toEmail,
+      subject: confirmSubject,
+      text: confirmText,
+      html: confirmHtml,
+    });
+
+    if (confirmError) {
+      // eslint-disable-next-line no-console
+      console.error("[api/contact] confirmation email failed", {
+        confirmError,
+        fromEmail,
+        to: email,
+        notifyId: notifyData?.id,
+      });
+    } else if (process.env.NODE_ENV === "development") {
+      // eslint-disable-next-line no-console
+      console.info("[api/contact] confirmation sent", confirmData?.id);
     }
   } catch (err) {
     // eslint-disable-next-line no-console

@@ -23,7 +23,7 @@ Create **`.env.local`** in the **project root** (next to `package.json`) for loc
 - `NEXT_PUBLIC_CALENDLY_URL` — optional; defaults to the [Complete AI IT Services Calendly](https://calendly.com/completeaiitservices) inline embed. Set in Vercel if you use a different event or subdomain.
 - `RESEND_API_KEY` — **required in production** for the contact form; create at [resend.com](https://resend.com)
 - `CONTACT_TO_EMAIL` — optional; defaults to `kavitha@completeaiitservices.ai`
-- `CONTACT_FROM_EMAIL` — optional; defaults to Resend’s test sender `Complete AI IT Services <onboarding@resend.dev>`. After you verify `completeaiitservices.ai` in Resend, set e.g. `Complete AI IT Services <info@completeaiitservices.ai>`
+- `CONTACT_FROM_EMAIL` — optional; defaults to Resend’s test sender `Complete AI IT Services <onboarding@resend.dev>`. **Required for visitor confirmation emails:** verify `completeaiitservices.ai` in Resend, then set e.g. `Complete AI IT Services <info@completeaiitservices.ai>` (test sender cannot reliably email third-party Gmail addresses)
 - `CONTACT_WEBHOOK_URL` — optional; also POSTs contact JSON to a webhook (n8n/Zapier)
 - `SUBSCRIBE_WEBHOOK_URL` — optional; production newsletter POST target
 
