@@ -21,10 +21,13 @@ Create **`.env.local`** in the **project root** (next to `package.json`) for loc
 
 - `NEXT_PUBLIC_SITE_URL` — optional; public site URL (no trailing slash), for canonical URLs on blog pages. Production example: `https://completeaiitservices.ai`
 - `NEXT_PUBLIC_CALENDLY_URL` — optional; defaults to the [Complete AI IT Services Calendly](https://calendly.com/completeaiitservices) inline embed. Set in Vercel if you use a different event or subdomain.
-- `CONTACT_WEBHOOK_URL` — optional; production contact form POST target
+- `RESEND_API_KEY` — **required in production** for the contact form; create at [resend.com](https://resend.com)
+- `CONTACT_TO_EMAIL` — optional; defaults to `kavitha@completeaiitservices.ai`
+- `CONTACT_FROM_EMAIL` — optional; defaults to Resend’s test sender `Complete AI IT Services <onboarding@resend.dev>`. After you verify `completeaiitservices.ai` in Resend, set e.g. `Complete AI IT Services <info@completeaiitservices.ai>`
+- `CONTACT_WEBHOOK_URL` — optional; also POSTs contact JSON to a webhook (n8n/Zapier)
 - `SUBSCRIBE_WEBHOOK_URL` — optional; production newsletter POST target
 
-On **Vercel**, set the same variables under **Project → Settings → Environment Variables**.
+On **Vercel**, set the same variables under **Project → Settings → Environment Variables** (Production + Preview). Redeploy after adding `RESEND_API_KEY`.
 
 ## Repository and production domain
 

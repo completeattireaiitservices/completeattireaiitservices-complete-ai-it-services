@@ -12,16 +12,19 @@ export const SITE_HEADER_FALLBACK_CSS = `
   .caits-hdr{flex-wrap:nowrap;padding:1rem 2rem;gap:1.5rem}
 }
 .caits-hdr-desktop{box-sizing:border-box;display:none!important;position:absolute;left:50%;transform:translateX(-50%);align-items:center;gap:2rem;font-size:16px;font-weight:400;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.95)}
-.caits-hdr-mobile{box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:.25rem .5rem;font-size:12px;font-weight:400;text-transform:uppercase;letter-spacing:.05em;color:rgba(255,255,255,.9);max-width:min(100%,calc(100vw - 11rem))}
+.caits-hdr-burger{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;padding:.5rem;color:#fff;border-radius:.25rem}
+.caits-hdr-mobile{box-sizing:border-box;display:none;position:absolute;left:0;right:0;top:100%;z-index:50;padding:.75rem;border-top:1px solid rgba(255,255,255,.1);background:rgba(2,6,23,.95);box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.caits-hdr-mobile:not([hidden]){display:block}
 @media (min-width:768px){
   .caits-hdr-desktop{display:flex!important}
+  .caits-hdr-burger{display:none!important}
   .caits-hdr-mobile{display:none!important}
 }
 @media (max-width:767.98px){
   .caits-hdr-desktop{display:none!important}
-  .caits-hdr-mobile{display:flex!important}
+  .caits-hdr-burger{display:inline-flex!important}
 }
-.caits-hdr-tools{box-sizing:border-box;display:flex;align-items:center;gap:.75rem;margin-left:auto}
+.caits-hdr-tools{box-sizing:border-box;display:flex;align-items:center;gap:.5rem;margin-left:auto}
 @media (min-width:768px){
   .caits-hdr-tools{gap:1rem}
 }

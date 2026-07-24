@@ -101,7 +101,7 @@ export default function BlogPage() {
           </main>
 
           <section
-            className="relative min-h-[260px] overflow-hidden md:min-h-[300px]"
+            className="relative min-h-[260px] overflow-hidden border-y border-slate-200/90 md:min-h-[300px]"
             aria-label="Services call to action"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -109,7 +109,7 @@ export default function BlogPage() {
               src={CTA_BG}
               alt=""
               decoding="async"
-              className="absolute inset-0 h-full w-full object-cover blur-[2px] brightness-[0.4]"
+              className="absolute inset-0 h-full w-full object-cover opacity-[0.18] blur-[1px] saturate-75"
               aria-hidden
               onError={(e) => {
                 const el = e.currentTarget;
@@ -118,14 +118,21 @@ export default function BlogPage() {
                 }
               }}
             />
-            <div className="absolute inset-0 bg-black/45" aria-hidden />
-            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 py-16 text-center text-[20px] text-white md:py-20">
-              <h2 className="font-bold uppercase tracking-wide text-white">
+            <div
+              className="absolute inset-0 bg-gradient-to-br from-slate-100 via-sky-50 to-teal-50/90"
+              aria-hidden
+            />
+            <div
+              className="absolute inset-0 bg-gradient-to-t from-white/50 via-transparent to-white/40"
+              aria-hidden
+            />
+            <div className="relative z-10 flex flex-col items-center justify-center px-6 py-16 text-center text-[20px] md:py-20">
+              <h2 className="font-bold uppercase tracking-wide text-slate-900">
                 See our services
               </h2>
               <Link
                 href="/services"
-                className="mt-8 inline-block border border-white px-8 py-2.5 font-semibold uppercase tracking-wide text-white transition hover:bg-white/10"
+                className="mt-8 inline-block border border-slate-800 bg-white/80 px-8 py-2.5 font-semibold uppercase tracking-wide text-slate-900 shadow-sm transition hover:border-teal-700 hover:bg-teal-700 hover:text-white"
               >
                 View services
               </Link>
