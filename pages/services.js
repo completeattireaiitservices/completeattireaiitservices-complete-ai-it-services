@@ -67,6 +67,11 @@ const OFFERING_ACCENTS = [
     badge: "from-fuchsia-600 to-fuchsia-500",
     glow: "bg-fuchsia-500/10",
   },
+  {
+    border: "border-l-cyan-500",
+    badge: "from-cyan-600 to-cyan-500",
+    glow: "bg-cyan-500/10",
+  },
 ];
 
 const SERVICE_OFFERINGS = [
@@ -249,6 +254,33 @@ const SERVICE_OFFERINGS = [
         scope:
           "Departmental Workflow Mapping: Full-scale video documentation audit across a department (Sales, HR, or Ops). Custom logic handling, API bridging, and complete zero-fault architecture setup.",
         investment: "Setup: $7,000+  ·  Retainer: Custom",
+      },
+    ],
+  },
+  {
+    num: 8,
+    title:
+      "Autonomous QA & Quality Engineering Engine (AI-Powered E-Commerce & Retail Testing)",
+    blurb:
+      "Eliminate manual regression bottlenecks, prevent checkout revenue leaks, and achieve 10x test coverage across web and mobile platforms with self-healing AI agents.",
+    tiers: [
+      {
+        size: "Small",
+        scope:
+          "Core E-Commerce Testing Suite: AI script generation for up to 5 critical funnels (Login, Search, Cart, Loyalty, Checkout). Claude Code + Playwright execution with automated n8n bug reporting to Jira/GitHub.",
+        investment: "Setup: $4,500 – $6,500  ·  Retainer: $1,250/mo",
+      },
+      {
+        size: "Medium",
+        scope:
+          "Agentic Self-Healing & MCP Automation: Custom MCP Servers connecting LLMs to staging DBs/APIs. Sub-agent architecture for visual regression, auto-healing test scripts, and n8n CI/CD PR triggers.",
+        investment: "Setup: $12,500 – $18,500  ·  Retainer: $2,800/mo",
+      },
+      {
+        size: "Enterprise",
+        scope:
+          "Full Autonomous QE Ecosystem: Multi-Agent Swarms with Claude Code Skill Systems trained on domain docs (PCI-DSS, Loyalty APIs, ERP sync). Offline LLM deployments, defect triage agents, and drop load testing.",
+        investment: "Setup: $35,000+  ·  Retainer: Custom",
       },
     ],
   },
@@ -548,7 +580,7 @@ export default function ServicesPage() {
         <title>Our Services | Complete AI IT Services</title>
         <meta
           name="description"
-          content="High-performance AI scaled to your business: RAG assistants, content engines, omnichannel distribution, receipt capture, brand guardian, executive briefings, and custom Record & Automate audits. Pleasanton, CA."
+          content="High-performance AI scaled to your business: RAG assistants, content engines, omnichannel distribution, receipt capture, brand guardian, executive briefings, custom Record & Automate audits, and autonomous QA for e-commerce. Pleasanton, CA."
         />
       </Head>
       <div
@@ -606,7 +638,7 @@ export default function ServicesPage() {
             {SERVICE_OFFERINGS.map((o, i) => (
               <React.Fragment key={o.num}>
                 <ServiceOfferingCard item={o} index={i} />
-                {o.num === 7 ? <BillingOptionsNote /> : null}
+                {i === SERVICE_OFFERINGS.length - 1 ? <BillingOptionsNote /> : null}
               </React.Fragment>
             ))}
           </div>
