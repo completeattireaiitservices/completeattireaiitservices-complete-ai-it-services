@@ -72,6 +72,11 @@ const OFFERING_ACCENTS = [
     badge: "from-cyan-600 to-cyan-500",
     glow: "bg-cyan-500/10",
   },
+  {
+    border: "border-l-orange-500",
+    badge: "from-orange-600 to-orange-500",
+    glow: "bg-orange-500/10",
+  },
 ];
 
 const SERVICE_OFFERINGS = [
@@ -281,6 +286,33 @@ const SERVICE_OFFERINGS = [
         scope:
           "Full Autonomous QE Ecosystem: Multi-Agent Swarms with Claude Code Skill Systems trained on domain docs (PCI-DSS, Loyalty APIs, ERP sync). Offline LLM deployments, defect triage agents, and drop load testing.",
         investment: "Setup: $35,000+  ·  Retainer: Custom",
+      },
+    ],
+  },
+  {
+    num: 9,
+    title:
+      "Enterprise Performance & Load Testing Intelligence (JMeter & API Resilience)",
+    blurb:
+      "Simulate real-world high-concurrency traffic, eliminate server bottlenecks, and protect revenue during peak user events with end-to-end performance and REST API load testing.",
+    tiers: [
+      {
+        size: "Small",
+        scope:
+          "Baseline Web & API Load Testing: Scripting for up to 5 critical web/REST API user paths using Apache JMeter. Thread group concurrency simulation, assertion validation, and response time metrics.",
+        investment: "Setup: $3,500 – $5,000  ·  Retainer: $950/mo",
+      },
+      {
+        size: "Medium",
+        scope:
+          "Advanced Load Architecture & Plugins: Data-driven testing (CSV/database), dynamic response correlation, BeanShell/JSR223 scripting, custom JMeter plugins, and automated n8n performance alert reporting.",
+        investment: "Setup: $8,500 – $14,000  ·  Retainer: $2,200/mo",
+      },
+      {
+        size: "Enterprise",
+        scope:
+          "Omnichannel Performance Ecosystem: Hybrid JMeter + Selenium integration, multi-region distributed cloud load generation, real-time APM monitoring (Datadog/Grafana), and custom load testing for peak drop events.",
+        investment: "Setup: $25,000+  ·  Retainer: Custom",
       },
     ],
   },
@@ -580,7 +612,7 @@ export default function ServicesPage() {
         <title>Our Services | Complete AI IT Services</title>
         <meta
           name="description"
-          content="High-performance AI scaled to your business: RAG assistants, content engines, omnichannel distribution, receipt capture, brand guardian, executive briefings, custom Record & Automate audits, and autonomous QA for e-commerce. Pleasanton, CA."
+          content="High-performance AI scaled to your business: RAG assistants, content engines, omnichannel distribution, receipt capture, brand guardian, executive briefings, custom audits, autonomous QA, and JMeter load testing. Pleasanton, CA."
         />
       </Head>
       <div
