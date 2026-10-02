@@ -7,7 +7,7 @@ import clsx from "clsx";
  * Expandable FAQ list with a small triangle indicator.
  *
  * @param {{
- *   items: { q: string; a: string }[];
+ *   items: { q: string; a: React.ReactNode }[];
  *   className?: string;
  *   itemClassName?: string;
  *   questionClassName?: string;
@@ -79,14 +79,14 @@ export default function FaqAccordion({
               hidden={!open}
               className={clsx(!open && "hidden")}
             >
-              <p
+              <div
                 className={clsx(
                   "m-0 border-t border-slate-200/70 px-5 pb-5 pt-3 text-[16px] leading-relaxed text-slate-600 sm:px-6 sm:pb-6 sm:pl-[2.65rem] sm:text-[17px]",
                   answerClassName,
                 )}
               >
                 {item.a}
-              </p>
+              </div>
             </div>
           </li>
         );
