@@ -336,75 +336,47 @@ const FAQ_ITEMS = [
     a: "Either party may end the monthly retainer with 30 days written notice. Implementation fees are non-refundable once the knowledge base sync has been established and tested successfully.",
   },
   {
-    q: "How do self-healing AI test agents work in Service 08, and will they break our production database?",
-    a: "Our AI test agents (built on Playwright and Claude Code) run strictly inside isolated staging, sandbox, or preview environments (e.g., Vercel / Netlify preview deploys). They interact with front-end UI elements just like real users—navigating carts, entering test credit cards, and verifying checkout logic. When a UI selector or workflow changes, the agent dynamically re-analyzes the DOM layout to heal the test script automatically rather than raising a false-positive alarm. They never write or mutate data in production.",
+    q: "How do self-healing AI test agents work, and will they touch production?",
+    a: "Agents run only in staging or preview environments (Playwright + Claude Code). They behave like real shoppers; when the UI changes, scripts self-heal from the DOM instead of failing blindly. Production data is never written or changed.",
   },
   {
-    q: "How does Service 08 handle complex e-commerce flows like third-party payment gateways, discount codes, and inventory sync?",
-    a: "We build dedicated test mock endpoints or utilize sandbox test accounts for providers like Stripe, Shopify Payments, PayPal, and ERP/loyalty APIs. The agents continuously test end-to-end user journeys—including applying promotional codes, calculating region-specific taxes, checking inventory allocation, and triggering order confirmation emails—logging defects straight to Jira/GitHub via n8n if any step fails.",
+    q: "How do you test payments, promo codes, and inventory sync?",
+    a: "We use provider sandboxes or mocks (Stripe, Shopify, PayPal, ERP/loyalty APIs) and run full checkout journeys—codes, tax, inventory, confirmation emails—with failures logged to Jira or GitHub through n8n.",
   },
   {
-    q: "What is the difference between Service 08 (Functional QA) and Service 09 (Performance/Load Testing)?",
+    q: "What is the difference between functional QA and load testing?",
     a: (
-      <ul className="m-0 list-disc space-y-2.5 pl-5">
+      <ul className="m-0 list-disc space-y-2 pl-5">
         <li>
-          <strong className="font-semibold text-slate-800">Service 08 (Autonomous QA):</strong>{" "}
-          Focuses on functionality and visual correctness—verifying that buttons work, checkouts
-          complete, links don&apos;t break, and layout shifts don&apos;t ruin the user experience
-          across mobile and desktop.
+          <strong className="font-semibold text-slate-800">Functional QA:</strong> Correctness of
+          flows, UI, and checkout across devices.
         </li>
         <li>
-          <strong className="font-semibold text-slate-800">Service 09 (Performance &amp; Load Testing):</strong>{" "}
-          Focuses on speed and server resilience under pressure—simulating hundreds or thousands of
-          simultaneous concurrent users hitting your APIs and databases via Apache JMeter to ensure
-          your site doesn&apos;t crash during flash sales or product drops.
+          <strong className="font-semibold text-slate-800">Load testing:</strong> Speed and stability
+          under heavy concurrent traffic (JMeter), so peaks don&apos;t take the site down.
         </li>
       </ul>
     ),
   },
   {
-    q: "Will running load tests during Service 09 disrupt our live website traffic or trigger DDoS security blocks?",
-    a: "All load tests are coordinated, scheduled, and configured with distributed IP rotation and custom headers to bypass Cloudflare/AWS WAF rate limits safely. We typically conduct ramp-up and stress tests against staging mirrors or during scheduled off-peak maintenance windows. This ensures we identify database lock bottlenecks, memory leaks, and API latency without affecting live shoppers.",
+    q: "Will load tests disrupt live traffic or trigger security blocks?",
+    a: "Tests are scheduled and scoped—often on staging or off-peak—with IP rotation and headers where needed for WAF/CDN safety. Live shoppers are not the target of stress runs.",
   },
   {
-    q: "What deliverables do we receive after a Service 09 Performance & Load Test engagement?",
-    a: (
-      <>
-        <p className="m-0 mb-3">
-          You receive an executive <strong className="font-semibold text-slate-800">Resilience &amp; Bottleneck Audit Report</strong> detailing:
-        </p>
-        <ul className="m-0 list-disc space-y-2.5 pl-5">
-          <li>
-            <strong className="font-semibold text-slate-800">Peak Concurrency Breakpoint:</strong>{" "}
-            The exact user threshold where latency degrades or server errors occur.
-          </li>
-          <li>
-            <strong className="font-semibold text-slate-800">API &amp; DB Bottleneck Map:</strong>{" "}
-            Specific slow endpoints, database query deadlocks, or unindexed tables causing
-            slowdowns.
-          </li>
-          <li>
-            <strong className="font-semibold text-slate-800">Actionable Engineering Plan:</strong>{" "}
-            Step-by-step remediation guidance for your development team or DevOps leads, along with
-            re-test validation scripts.
-          </li>
-        </ul>
-      </>
-    ),
+    q: "What deliverables come from a performance and load test engagement?",
+    a: "A Resilience & Bottleneck Audit Report: peak concurrency limit, slow APIs/DB hotspots, and a remediation plan with scripts to re-test after fixes.",
   },
   {
-    q: "How do the monthly retainers apply to QA and Performance Testing after the initial setup?",
+    q: "What do retainers cover after initial QA or load-testing setup?",
     a: (
-      <ul className="m-0 list-disc space-y-2.5 pl-5">
+      <ul className="m-0 list-disc space-y-2 pl-5">
         <li>
-          <strong className="font-semibold text-slate-800">Service 08 Retainer:</strong> Includes
-          updating test suites as you launch new site features, monitoring CI/CD pipeline triggers,
-          and prompt tuning/agent maintenance.
+          <strong className="font-semibold text-slate-800">QA retainer:</strong> Suite updates for new
+          features, CI monitoring, agent maintenance.
         </li>
         <li>
-          <strong className="font-semibold text-slate-800">Service 09 Retainer:</strong> Includes
-          pre-event load dry runs before major promotional campaigns or product drops, as well as
-          monthly API latency regression benchmarks.
+          <strong className="font-semibold text-slate-800">Load-testing retainer:</strong> Pre-event dry
+          runs and monthly latency regression checks.
         </li>
       </ul>
     ),
