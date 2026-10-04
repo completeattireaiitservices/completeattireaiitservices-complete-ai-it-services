@@ -77,6 +77,11 @@ const OFFERING_ACCENTS = [
     badge: "from-orange-600 to-orange-500",
     glow: "bg-orange-500/10",
   },
+  {
+    border: "border-l-lime-600",
+    badge: "from-lime-600 to-lime-500",
+    glow: "bg-lime-500/10",
+  },
 ];
 
 const SERVICE_OFFERINGS = [
@@ -313,6 +318,32 @@ const SERVICE_OFFERINGS = [
         scope:
           "Omnichannel Performance Ecosystem: Hybrid JMeter + Selenium integration, multi-region distributed cloud load generation, real-time APM monitoring (Datadog/Grafana), and custom load testing for peak drop events.",
         investment: "Setup: $25,000+  ·  Retainer: Custom",
+      },
+    ],
+  },
+  {
+    num: 10,
+    title: "AI-Integrated Custom Web Development & Conversion Architecture",
+    blurb:
+      "Launch sites built to convert—Next.js / React, Webflow / WordPress, n8n automation pipelines, and RAG-powered chat integrated from day one.",
+    tiers: [
+      {
+        size: "Small",
+        scope:
+          "Landing Page / Business Site: Up to 5 pages, n8n CRM pipelines, and AI knowledge assistant chatbot widget pre-installed.",
+        investment: "Setup: $2,500 – $3,800  ·  Retainer: $190/mo",
+      },
+      {
+        size: "Medium",
+        scope:
+          "Full Corporate / E-Commerce Site: Up to 15 pages, Webflow or WordPress CMS, Stripe payments, SEO schema markup, and full automation sync.",
+        investment: "Setup: $5,500 – $8,500  ·  Retainer: $450/mo",
+      },
+      {
+        size: "Enterprise",
+        scope:
+          "Headless Next.js / React Enterprise Web App: Custom web application, CMS, global CDN deployment, multi-language support, and custom API integrations.",
+        investment: "Setup: $15,000+  ·  Retainer: Custom",
       },
     ],
   },
@@ -658,7 +689,7 @@ export default function ServicesPage() {
         <title>Our Services | Complete AI IT Services</title>
         <meta
           name="description"
-          content="High-performance AI scaled to your business: RAG assistants, content engines, omnichannel distribution, receipt capture, brand guardian, executive briefings, custom audits, autonomous QA, and JMeter load testing. Pleasanton, CA."
+          content="High-performance AI scaled to your business: RAG assistants, custom web development, content engines, QA, load testing, and n8n automation. Pleasanton, CA."
         />
       </Head>
       <div
