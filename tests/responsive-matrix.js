@@ -5,6 +5,7 @@ const AUDIT_ROUTES = [
   "/",
   "/services",
   "/about",
+  "/blog",
   "/contact-us",
   "/legal/privacy-policy",
   "/legal/terms-of-service",
