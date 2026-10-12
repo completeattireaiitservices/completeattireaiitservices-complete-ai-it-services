@@ -220,7 +220,7 @@ export default function Home() {
           content="Complete AI IT Services in Pleasanton, CA — custom AI architecture, n8n workflows, RAG knowledge assistants, and QA-backed automation for business growth."
         />
       </Head>
-      <div className="font-sans text-gray-800">
+      <div className="min-w-0 font-sans text-gray-800">
       {/* Hero: nav + image + CTA (reference layout) */}
       <section className="bg-[#1c1c1c] text-white">
         <SiteHeader activeNav="home" />
@@ -238,12 +238,14 @@ export default function Home() {
 
         <div className="px-4 py-10 text-center sm:px-6 sm:py-12 md:px-8 md:py-16">
           <h1
-            className={`${heroTitleFont.className} mx-auto max-w-4xl text-[30px] font-normal uppercase leading-[1.08] text-neutral-200 sm:text-[34px] md:text-[38px] lg:text-[42px]`}
+            className={`${heroTitleFont.className} mx-auto max-w-4xl text-balance font-normal uppercase leading-[1.08] text-neutral-200`}
+            style={{ fontSize: "clamp(1.65rem, 2.5vw + 0.85rem, 2.625rem)" }}
           >
             AI-Powered Automation for Business Growth
           </h1>
           <p
-            className={`${heroSubtitleFont.className} mx-auto mt-4 max-w-3xl text-[20px] font-normal leading-relaxed text-neutral-300`}
+            className={`${heroSubtitleFont.className} mx-auto mt-4 max-w-3xl text-pretty font-normal leading-relaxed text-neutral-300`}
+            style={{ fontSize: "clamp(1rem, 1.2vw + 0.75rem, 1.25rem)" }}
           >
             Less manual. More growth.
           </p>
@@ -272,7 +274,7 @@ export default function Home() {
             ABOUT US
           </Link>
         </h2>
-        <div className="mx-auto mt-10 grid w-full max-w-6xl grid-cols-1 justify-items-center gap-y-10 sm:gap-y-12 md:mt-16 md:grid-cols-3 md:justify-items-stretch md:gap-x-6 md:gap-y-0 lg:gap-x-10">
+        <div className="mx-auto mt-10 grid w-full max-w-6xl grid-cols-1 justify-items-center gap-y-10 sm:gap-y-12 md:mt-16 md:grid-cols-2 md:justify-items-stretch md:gap-x-6 md:gap-y-10 lg:grid-cols-3 lg:gap-y-0 lg:gap-x-10">
           <article className="flex w-full flex-col items-center text-center md:items-start md:text-left">
             <h3
               className={`${aboutUsColumnTitleFont.className} w-full text-center text-[20px] text-gray-900`}
@@ -423,11 +425,11 @@ export default function Home() {
           <h2
             id="reviews-heading"
             className={`${reviewsHeadingFont.className} m-0 text-center font-normal uppercase leading-tight tracking-normal text-white`}
-            style={{ fontSize: "48px", lineHeight: 1.1 }}
+            style={{ fontSize: "clamp(1.75rem, 4vw + 0.5rem, 3rem)", lineHeight: 1.1 }}
           >
             Reviews
           </h2>
-          <div className="mt-10 grid gap-6 md:grid-cols-3 md:gap-5">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
             {REVIEWS.map((review) => (
               <article
                 key={review.title}

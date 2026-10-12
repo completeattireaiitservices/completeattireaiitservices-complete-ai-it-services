@@ -173,7 +173,7 @@ export default function TieredMethodologySection({
         </div>
 
         {/* Desktop: connected stepper + cards */}
-        <div className="mt-10 hidden md:block">
+        <div className="mt-10 hidden lg:block">
           <div className="relative mb-8 px-4 lg:px-6">
             <div
               className="absolute left-[10%] right-[10%] top-7 h-[3px] rounded-full bg-gradient-to-r from-indigo-300 via-violet-400 to-amber-300"
@@ -246,7 +246,7 @@ export default function TieredMethodologySection({
         </div>
 
         {/* Mobile: vertical timeline */}
-        <ol className="mt-10 list-none space-y-0 p-0 md:hidden">
+        <ol className="mt-10 list-none space-y-0 p-0 lg:hidden">
           {METHODOLOGY_PHASES.map((block, i) => {
             const a = METHODOLOGY_ACCENTS[i % METHODOLOGY_ACCENTS.length];
             const isLast = i === METHODOLOGY_PHASES.length - 1;

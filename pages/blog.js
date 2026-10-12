@@ -67,7 +67,8 @@ export default function BlogPage() {
         >
           <main>
             <h1
-              className={`${blogSquadaFont.className} m-0 px-4 pb-2 pt-12 text-center text-[48px] font-normal uppercase leading-none tracking-wide text-neutral-900 sm:px-6 sm:pt-16 md:pt-20`}
+              className={`${blogSquadaFont.className} m-0 px-4 pb-2 pt-12 text-center font-normal uppercase leading-none tracking-wide text-neutral-900 sm:px-6 sm:pt-16 md:pt-20`}
+              style={{ fontSize: "clamp(1.75rem, 4vw + 0.5rem, 3rem)" }}
             >
               THE BLOG
             </h1>

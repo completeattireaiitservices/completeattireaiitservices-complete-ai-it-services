@@ -6,10 +6,26 @@
   html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    scroll-padding-top: 5rem;
+    overflow-x: clip;
   }
 
   body {
     @apply antialiased;
+    overflow-x: clip;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(99 102 241);
+    outline-offset: 2px;
   }
 }
 
@@ -27,5 +43,23 @@
       opacity: 1;
       transform: scale(1) translateY(0);
     }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .caits-site-search-panel {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

@@ -11,16 +11,16 @@ export const SITE_HEADER_FALLBACK_CSS = `
 @media (min-width:768px){
   .caits-hdr{flex-wrap:nowrap;padding:1rem 2rem;gap:1.5rem}
 }
-.caits-hdr-desktop{box-sizing:border-box;display:none!important;position:absolute;left:50%;transform:translateX(-50%);align-items:center;gap:2rem;font-size:16px;font-weight:400;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.95)}
-.caits-hdr-burger{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;padding:.5rem;color:#fff;border-radius:.25rem}
+.caits-hdr-desktop{box-sizing:border-box;display:none!important;position:absolute;left:50%;transform:translateX(-50%);align-items:center;gap:1.5rem;font-size:15px;font-weight:400;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.95)}
+.caits-hdr-burger{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;min-height:2.75rem;min-width:2.75rem;color:#fff;border-radius:.5rem}
 .caits-hdr-mobile{box-sizing:border-box;display:none;position:absolute;left:0;right:0;top:100%;z-index:50;padding:.75rem;border-top:1px solid rgba(255,255,255,.1);background:rgba(2,6,23,.95);box-shadow:0 12px 40px rgba(0,0,0,.35)}
 .caits-hdr-mobile:not([hidden]){display:block}
-@media (min-width:768px){
+@media (min-width:1024px){
   .caits-hdr-desktop{display:flex!important}
   .caits-hdr-burger{display:none!important}
   .caits-hdr-mobile{display:none!important}
 }
-@media (max-width:767.98px){
+@media (max-width:1023.98px){
   .caits-hdr-desktop{display:none!important}
   .caits-hdr-burger{display:inline-flex!important}
 }

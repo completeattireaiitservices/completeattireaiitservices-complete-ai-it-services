@@ -50,8 +50,8 @@ export default function SubscribeForm({ titleFontClassName, signUpButtonFontClas
         {titleFontClassName ? (
           <h2
             id="subscribe-heading"
-            className={`${titleFontClassName} shrink-0 text-left text-[48px] font-normal uppercase leading-none tracking-wide text-neutral-900 antialiased`}
-            style={{ lineHeight: 1.1 }}
+            className={`${titleFontClassName} shrink-0 text-left font-normal uppercase leading-none tracking-wide text-neutral-900 antialiased sm:text-left`}
+            style={{ fontSize: "clamp(1.75rem, 4vw + 0.5rem, 3rem)", lineHeight: 1.1 }}
           >
             Subscribe
           </h2>

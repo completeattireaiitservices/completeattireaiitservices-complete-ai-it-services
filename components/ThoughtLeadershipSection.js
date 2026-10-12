@@ -102,7 +102,7 @@ export default function ThoughtLeadershipSection() {
       <h2
         id="thought-leadership-heading"
         className={`${thoughtLeadershipTitleFont.className} m-0 text-center font-normal uppercase leading-tight text-neutral-900`}
-        style={{ fontSize: "48px", lineHeight: 1.1 }}
+        style={{ fontSize: "clamp(1.75rem, 4vw + 0.5rem, 3rem)", lineHeight: 1.1 }}
       >
         Thought Leadership
       </h2>
@@ -111,7 +111,7 @@ export default function ThoughtLeadershipSection() {
         <button
           type="button"
           onClick={() => scrollByDir(-1)}
-          className="absolute left-0 top-[42%] z-10 hidden -translate-y-1/2 rounded-full border border-neutral-300 bg-white p-2 text-neutral-500 shadow-sm transition hover:bg-neutral-50 hover:text-neutral-800 md:flex min-[1280px]:hidden"
+          className="absolute left-0 top-[42%] z-10 hidden min-h-11 min-w-11 -translate-y-1/2 items-center justify-center rounded-full border border-neutral-300 bg-white text-neutral-500 shadow-sm transition hover:bg-neutral-50 hover:text-neutral-800 md:flex lg:hidden"
           aria-label="Previous articles"
         >
           <ChevronLeft className="h-6 w-6" strokeWidth={1.5} />
@@ -119,7 +119,7 @@ export default function ThoughtLeadershipSection() {
         <button
           type="button"
           onClick={() => scrollByDir(1)}
-          className="absolute right-0 top-[42%] z-10 hidden -translate-y-1/2 rounded-full border border-neutral-300 bg-white p-2 text-neutral-500 shadow-sm transition hover:bg-neutral-50 hover:text-neutral-800 md:flex min-[1280px]:hidden"
+          className="absolute right-0 top-[42%] z-10 hidden min-h-11 min-w-11 -translate-y-1/2 items-center justify-center rounded-full border border-neutral-300 bg-white text-neutral-500 shadow-sm transition hover:bg-neutral-50 hover:text-neutral-800 md:flex lg:hidden"
           aria-label="Next articles"
         >
           <ChevronRight className="h-6 w-6" strokeWidth={1.5} />
@@ -127,24 +127,24 @@ export default function ThoughtLeadershipSection() {
 
         <div
           ref={scrollerRef}
-          className="flex min-[1280px]:grid min-[1280px]:max-w-[1252px] min-[1280px]:grid-cols-4 min-[1280px]:gap-6 min-[1280px]:overflow-visible gap-8 overflow-x-auto scroll-smooth px-1 pb-4 pt-2 [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory md:px-12 min-[1280px]:px-0 [&::-webkit-scrollbar]:hidden"
+          className="flex gap-8 overflow-x-auto scroll-smooth px-1 pb-4 pt-2 [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory md:px-12 lg:grid lg:max-w-[1252px] lg:grid-cols-2 lg:gap-6 lg:overflow-visible lg:px-0 xl:grid-cols-4 [&::-webkit-scrollbar]:hidden"
         >
           {THOUGHT_LEADERSHIP.map((post) => (
             <article
               key={post.slug ?? post.title}
-              className="w-[min(100%,min(92vw,300px))] shrink-0 snap-center min-w-0 md:w-[280px] min-[1280px]:w-full"
+              className="w-[min(100%,min(92vw,300px))] shrink-0 snap-center min-w-0 md:w-[280px] lg:w-full lg:shrink"
             >
               <Link
                 href={post.href}
                 className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2"
               >
-                <div className="relative aspect-[4/3] w-full min-[1280px]:aspect-[313/481] min-[1280px]:max-h-[481px] overflow-hidden bg-neutral-200">
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-200 xl:aspect-[313/481] xl:max-h-[481px]">
                   <SafeImage
                     src={post.image}
                     alt={post.title}
                     fill
                     className="object-cover transition duration-300 group-hover:scale-[1.02]"
-                    sizes="(max-width: 1279px) 92vw, 313px"
+                    sizes="(max-width: 1023px) 92vw, (max-width: 1279px) 45vw, 313px"
                   />
                 </div>
                 <p

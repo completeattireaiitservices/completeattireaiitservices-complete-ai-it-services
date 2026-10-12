@@ -67,7 +67,7 @@ export default function SiteHeader({ endAction = "search", activeNav, hideLogo =
   }, [menuOpen]);
 
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
+    const mq = window.matchMedia("(min-width: 1024px)");
     const onChange = () => {
       if (mq.matches) setMenuOpen(false);
     };
@@ -104,7 +104,7 @@ export default function SiteHeader({ endAction = "search", activeNav, hideLogo =
       ) : null}
 
       <nav
-        className={`caits-hdr-desktop ${navFont.className} absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 text-[16px] font-normal uppercase tracking-widest text-white/95 md:flex`}
+        className={`caits-hdr-desktop ${navFont.className} absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 text-[15px] font-normal uppercase tracking-[0.12em] text-white/95 lg:flex xl:gap-8 xl:text-[16px] xl:tracking-widest`}
         aria-label="Primary"
       >
         {NAV_DESKTOP.map(({ id, href, label }) => {
@@ -149,7 +149,7 @@ export default function SiteHeader({ endAction = "search", activeNav, hideLogo =
 
         <button
           type="button"
-          className="caits-hdr-burger inline-flex items-center justify-center rounded p-2 text-white transition hover:bg-white/10 md:hidden"
+          className="caits-hdr-burger inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg text-white transition hover:bg-white/10 lg:hidden"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
           aria-controls={menuId}
@@ -168,7 +168,7 @@ export default function SiteHeader({ endAction = "search", activeNav, hideLogo =
         className={clsx(
           "caits-hdr-mobile",
           navFont.className,
-          "absolute left-0 right-0 top-full z-50 origin-top border-t border-white/10 bg-slate-950/95 px-3 py-4 shadow-xl backdrop-blur-md md:hidden",
+          "absolute left-0 right-0 top-full z-50 origin-top border-t border-white/10 bg-slate-950/95 px-3 py-4 shadow-xl backdrop-blur-md lg:hidden",
           menuOpen ? "block" : "hidden",
         )}
         aria-label="Mobile"

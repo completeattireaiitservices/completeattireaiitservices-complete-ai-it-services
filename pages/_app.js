@@ -44,7 +44,9 @@ class AppErrorBoundary extends React.Component {
 export default function MyApp({ Component, pageProps }) {
   return (
     <AppErrorBoundary>
-      <Component {...pageProps} />
+      <div className="min-w-0 overflow-x-clip">
+        <Component {...pageProps} />
+      </div>
     </AppErrorBoundary>
   );
 }
