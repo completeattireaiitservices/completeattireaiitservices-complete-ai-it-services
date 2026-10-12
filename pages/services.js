@@ -588,7 +588,16 @@ function BillingOptionsNote() {
 function TierTable({ rows }) {
   return (
     <div className="mt-6 w-full overflow-hidden rounded-2xl border border-slate-200/80 bg-slate-50/40 shadow-[0_1px_0_0_rgba(15,23,42,0.05)] ring-1 ring-slate-200/50">
-      <div className="w-full overflow-x-auto">
+      <p className="mb-2 px-4 pt-3 text-center text-xs text-slate-500 sm:text-sm lg:hidden">
+        Swipe horizontally to see full pricing table.
+      </p>
+      <div className="relative">
+        <div
+          className="w-full overflow-x-auto"
+          tabIndex={0}
+          role="region"
+          aria-label="Pricing table, scroll horizontally on small screens"
+        >
         <table className="min-w-[640px] w-full border-collapse text-left text-[16px] leading-relaxed sm:text-[17px]">
           <thead>
             <tr className="bg-slate-900/95 text-white">
@@ -632,6 +641,11 @@ function TierTable({ rows }) {
             ))}
           </tbody>
         </table>
+        </div>
+        <div
+          className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-slate-50 to-transparent lg:hidden"
+          aria-hidden
+        />
       </div>
     </div>
   );
