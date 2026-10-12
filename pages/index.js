@@ -50,8 +50,8 @@ const aboutUsColumnTitleFont = Share({
 });
 
 /**
- * “SOCIAL” heading only: 27px + Share with explicit stack (avoids next/font’s
- * size-adjusted “Share Fallback” label in devtools; use with inline fontSize).
+ * “SOCIAL” heading only: Share with explicit stack (avoids next/font’s
+ * size-adjusted “Share Fallback” label in devtools; size via clamp on the h2).
  */
 const socialHeaderFont = Share({
   weight: "400",
@@ -363,8 +363,7 @@ export default function Home() {
       >
         <h2
           id="social-heading"
-          className={`${socialHeaderFont.className} m-0 text-center font-normal uppercase leading-normal tracking-wide text-white antialiased`}
-          style={{ fontSize: "27px", lineHeight: 1.2 }}
+          className={`${socialHeaderFont.className} m-0 text-center font-normal uppercase tracking-wide text-white antialiased text-[clamp(1.25rem,3.5vw,1.6875rem)] leading-tight`}
         >
           Social
         </h2>
