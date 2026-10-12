@@ -79,7 +79,7 @@ export default function SiteHeader({ endAction = "search", activeNav, hideLogo =
     <header
       ref={headerRef}
       className={clsx(
-        "caits-hdr relative z-40 mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-3 py-3 sm:flex-nowrap sm:gap-4 sm:px-5 sm:py-4 md:gap-6 md:px-8",
+        "caits-hdr relative z-40 mx-auto flex max-w-7xl flex-wrap items-center gap-3 pb-3 pl-[max(0.75rem,env(safe-area-inset-left))] pr-[max(0.75rem,env(safe-area-inset-right))] pt-[max(0.75rem,env(safe-area-inset-top))] sm:flex-nowrap sm:gap-4 sm:pb-4 sm:pl-[max(1.25rem,env(safe-area-inset-left))] sm:pr-[max(1.25rem,env(safe-area-inset-right))] sm:pt-[max(1rem,env(safe-area-inset-top))] md:gap-6 md:pl-[max(2rem,env(safe-area-inset-left))] md:pr-[max(2rem,env(safe-area-inset-right))]",
         showLogo ? "caits-hdr--withLogo justify-between" : "justify-end",
       )}
     >
@@ -168,7 +168,7 @@ export default function SiteHeader({ endAction = "search", activeNav, hideLogo =
         className={clsx(
           "caits-hdr-mobile",
           navFont.className,
-          "absolute left-0 right-0 top-full z-50 origin-top border-t border-white/10 bg-slate-950/95 px-3 py-4 shadow-xl backdrop-blur-md lg:hidden",
+          "absolute left-0 right-0 top-full z-50 origin-top border-t border-white/10 bg-slate-950/95 py-4 pl-[max(0.75rem,env(safe-area-inset-left))] pr-[max(0.75rem,env(safe-area-inset-right))] shadow-xl backdrop-blur-md sm:pl-[max(1.25rem,env(safe-area-inset-left))] sm:pr-[max(1.25rem,env(safe-area-inset-right))] md:pl-[max(2rem,env(safe-area-inset-left))] md:pr-[max(2rem,env(safe-area-inset-right))] lg:hidden",
           menuOpen ? "block" : "hidden",
         )}
         aria-label="Mobile"

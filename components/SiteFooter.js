@@ -10,7 +10,7 @@ export default function SiteFooter({ blogListingTypography = false }) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#1c1c1c] px-4 py-10 text-center sm:px-6">
+    <footer className="bg-[#1c1c1c] pb-[max(2.5rem,env(safe-area-inset-bottom))] pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] pt-10 text-center sm:pl-[max(1.5rem,env(safe-area-inset-left))] sm:pr-[max(1.5rem,env(safe-area-inset-right))]">
       <nav
         className={clsx(
           "mb-5 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 font-share text-neutral-400",
