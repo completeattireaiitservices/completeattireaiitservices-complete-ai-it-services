@@ -1,27 +1,20 @@
 // @ts-check
 const { test, expect } = require("@playwright/test");
+const {
+  AUDIT_ROUTES,
+  AUDIT_VIEWPORTS,
+  SMOKE_VIEWPORTS,
+  expectsMobileNav,
+} = require("./responsive-matrix");
 
-const ROUTES = ["/", "/services", "/contact-us"];
-
-/** @type {{ name: string; width: number; height: number; mobileNav: boolean }[]} */
-const VIEWPORTS = [
-  {
-    name: "tablet-portrait-768",
-    width: 768,
-    height: 1024,
-    mobileNav: true,
-  },
-  {
-    name: "tablet-landscape-1024",
-    width: 1024,
-    height: 768,
-    mobileNav: false,
-  },
-];
+const fullMatrix = process.env.PLAYWRIGHT_FULL_MATRIX === "1";
+const ROUTES = AUDIT_ROUTES;
+const VIEWPORTS = fullMatrix ? AUDIT_VIEWPORTS : SMOKE_VIEWPORTS;
 
 for (const route of ROUTES) {
   for (const viewport of VIEWPORTS) {
-    const label = `${route} @ ${viewport.width}×${viewport.height}`;
+    const label = `${route} @ ${viewport.name} ${viewport.width}×${viewport.height}`;
+    const mobileNav = expectsMobileNav(viewport.width);
 
     test(`${label} — no horizontal overflow`, async ({ page }) => {
       await page.setViewportSize({
@@ -48,7 +41,7 @@ for (const route of ROUTES) {
       const burger = page.locator(".caits-hdr-burger");
       const primaryNav = page.getByRole("navigation", { name: "Primary" });
 
-      if (viewport.mobileNav) {
+      if (mobileNav) {
         await expect(
           page.getByRole("button", { name: /^open menu$/i }),
         ).toBeVisible();

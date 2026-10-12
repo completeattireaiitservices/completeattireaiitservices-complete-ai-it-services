@@ -11,7 +11,8 @@
     "build": "next build",
     "start": "next start -p 3000",
     "test:e2e": "playwright test",
-    "test:e2e:prod": "cross-env PLAYWRIGHT_BASE_URL=https://www.completeaiitservices.ai playwright test"
+    "test:e2e:prod": "cross-env PLAYWRIGHT_BASE_URL=https://www.completeaiitservices.ai playwright test",
+    "test:e2e:prod:full": "cross-env PLAYWRIGHT_BASE_URL=https://www.completeaiitservices.ai PLAYWRIGHT_FULL_MATRIX=1 playwright test"
   },
   "dependencies": {
     "clsx": "latest",
